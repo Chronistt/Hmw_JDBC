@@ -2,7 +2,7 @@ import java.sql.*;
 public class Application {
     public static void main(String[] args) throws SQLException {
 
-        final String user = "postgres";
+       /* final String user = "postgres";
         final String password = "dom88173827027";
         final String url = "jdbc:postgresql://localhost:5432/employee";
 
@@ -21,19 +21,24 @@ public class Application {
                 System.out.println(gender);
                 System.out.println("Возраст: " + age);
             }
-        }
+        }*/
 
         EmployeeDao employeeDao = new EmployeeDaoImpl();
-        System.out.println(employeeDao.getAllEmployee());
-        Employee employee = new Employee(1, "Мария", "Иванова", "fem", 37, new City(5, "Тобольск"));
+        Employee employee = new Employee(1, "Мария", "Иванова", "fem", 37, 5);
+        Employee employee1 = new Employee(2, "Иван", "Макарыч", "masc", 52, 2);
         employeeDao.add(employee);
         System.out.println(employeeDao.getAllEmployee());
+       // Employee employee = new Employee(1, "Мария", "Иванова", "fem", 37, new City(5, "Тобольск"));
+        //employeeDao.add(employee);
 
-        employee.setLast_name("Жукова");
-        employeeDao.updateEmployee(10, employee);
-        System.out.println(employeeDao.getById(10));
-        employeeDao.deleteEmployee(4);
+       // employee.setLast_name("Жукова");
+       // employeeDao.updateEmployee(10, employee);
+       // System.out.println(employeeDao.getById(10));
+       // employeeDao.deleteEmployee(4);
+        employeeDao.deleteEmployee(employee);
         System.out.println(employeeDao.getAllEmployee());
+
+        employeeDao.updateEmployee(employee);
     }
 
 }
