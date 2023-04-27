@@ -3,7 +3,7 @@ public class Application {
     public static void main(String[] args) throws SQLException {
 
         final String user = "postgres";
-        final String password = "Dom88173827027";
+        final String password = "dom88173827027";
         final String url = "jdbc:postgresql://localhost:5432/employee";
 
         try (final Connection connection = DriverManager.getConnection(user, password, url);
