@@ -1,10 +1,10 @@
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
-@Table (name = "employeeList")
+@Table(name = "employeeList")
 public class Employee {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String first_name;
@@ -16,12 +16,11 @@ public class Employee {
     private int age;
     @Column
     private int city;
-
     public Employee() {
     }
 
-    public Employee(int id, String first_name, String last_name, String gender, int age, int city) {
-        this.id = id;
+    public Employee(String first_name, String last_name, String gender, int age, int city) {
+
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;
@@ -29,7 +28,7 @@ public class Employee {
         this.city = city;
     }
 
-    public int getId() {
+    public Employee getId() {
         return id;
     }
 
