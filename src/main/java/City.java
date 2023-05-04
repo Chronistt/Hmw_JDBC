@@ -10,15 +10,22 @@ public class City {
     private int city_id;
     @Column
     private String city_name;
-    @OneToMany(mappedBy = "city_id")
+    @OneToMany(mappedBy = "city_id", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
     public City() {
     }
 
-    public City(int city_id, String city_name) {
-        this.city_id = city_id;
+    public City(String city_name) {
         this.city_name = city_name;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     public int getCity_id() {

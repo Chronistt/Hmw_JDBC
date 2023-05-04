@@ -16,26 +16,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
         transaction.commit();
         entityManager.close();
 
-        /*try (PreparedStatement statement = ConnectionConfig.getConnection().prepareStatement(
-                "INSERT INTO employeeList (first_name, last_name, gender, age, city_id) VALUES ((?),(?),(?),(?),(?))");) {
-            statement.setString(1, employee.getFirst_name());
-            statement.setString(2, employee.getLast_name());
-            statement.setString(3, employee.getGender());
-            statement.setInt(4, employee.getAge());
-           // statement.setInt(5, employee.getCity().getCity_id());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }*/
+
 
     }
 
     @Override
-    public Employee getById(Employee employee) {
+    public Employee getById(int id) {
         Employee employeeId;
         EntityManager entityManager = createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
-        employeeId = entityManager.find(Employee.class, employee.getId());
+        employeeId = entityManager.find(Employee.class, id);
         transaction.commit();
         entityManager.close();
         return employeeId;
@@ -43,11 +33,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> getAllEmployee() {
-        List<Employee> employees = new ArrayList<>();
+        List<Employee> employees;
 
         EntityManager entityManager = createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
-        String query = "SELECT e FROM employeeList e";
+        String query = "SELECT e FROM Employee e";
         employees = entityManager.createQuery(query).getResultList();
         transaction.commit();
         entityManager.close();
@@ -74,8 +64,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     EntityManager entityManager = createEntityManager();
     EntityTransaction transaction = entityManager.getTransaction();
     transaction.begin();
+    int id = employee.getId();
 
-        entityManager.remove(getById(employee.getId()));
+        entityManager.remove(getById (id));
 
     transaction.commit();
     entityManager.close();
