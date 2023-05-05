@@ -17,7 +17,6 @@ public class Employee {
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name="city_id")
 
-    @Column
     private City city;
     public Employee() {
     }

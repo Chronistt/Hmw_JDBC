@@ -39,7 +39,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         EntityTransaction transaction = entityManager.getTransaction();
         String query = "SELECT e FROM Employee e";
         employees = entityManager.createQuery(query).getResultList();
-        transaction.commit();
+        //transaction.commit();
         entityManager.close();
 
 
