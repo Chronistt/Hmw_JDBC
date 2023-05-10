@@ -1,16 +1,29 @@
-public class Employee {
-    private int id;
-    private String first_name;
-    private String last_name;
-    private String gender;
-    private int age;
-    private City city;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "employeeList")
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column
+    private String first_name;
+    @Column
+    private String last_name;
+    @Column
+    private String gender;
+    @Column
+    private int age;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name="city_id")
+
+    private City city;
     public Employee() {
     }
 
-    public Employee(int id, String first_name, String last_name, String gender, int age, City city) {
-        this.id = id;
+
+    public Employee(String first_name, String last_name, String gender, int age, City city) {
+
         this.first_name = first_name;
         this.last_name = last_name;
         this.gender = gender;

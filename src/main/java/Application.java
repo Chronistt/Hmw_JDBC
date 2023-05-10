@@ -1,39 +1,31 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Application {
+    static CityDaoImpl cityDao = new CityDaoImpl();
+    static EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
+
     public static void main(String[] args) throws SQLException {
 
-        final String user = "postgres";
-        final String password = "dom88173827027";
-        final String url = "jdbc:postgresql://localhost:5432/employee";
+        City city = new City("Pskov");
+        cityDao.add(city);
 
-        try (final Connection connection = DriverManager.getConnection(user, password, url);
-             PreparedStatement statement = connection.prepareStatement("" + "SELECT * FROM employeeList WHERE id = (?)")) {
-            statement.setInt(1, 6);
-            final ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String name = "Имя: " + resultSet.getString("first_name");
-                String surname = "Фамилия: " + resultSet.getString("last_name");
-                String gender = "Пол: " + resultSet.getString("gender");
-                int age = resultSet.getInt("age");
+        Employee employee1 = new Employee ("Мария", "Иванова", "fem", 37, city);
+        Employee employee2 = new Employee ("Максим", "Ганнов", "masc", 19, city);
 
-                System.out.println(name);
-                System.out.println(surname);
-                System.out.println(gender);
-                System.out.println("Возраст: " + age);
-            }
-        }
+        city.setEmployees(List.of(employee1,employee2));
 
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
-        System.out.println(employeeDao.getAllEmployee());
-        Employee employee = new Employee(1, "Мария", "Иванова", "fem", 37, new City(5, "Тобольск"));
-        employeeDao.add(employee);
-        System.out.println(employeeDao.getAllEmployee());
+        cityDao.updateCity(city);
 
-        employee.setLast_name("Жукова");
-        employeeDao.updateEmployee(10, employee);
-        System.out.println(employeeDao.getById(10));
-        employeeDao.deleteEmployee(4);
-        System.out.println(employeeDao.getAllEmployee());
+        System.out.println("Работники города: "+ employeeDao.getAllEmployee().containsAll(city.getEmployees()));
+
+
+
+
+
+
+
     }
 
 }

@@ -1,10 +1,31 @@
-public class City {
-    private int city_id;
-    private String city_name;
+import javax.persistence.*;
 
-    public City(int city_id, String city_name) {
-        this.city_id = city_id;
+import java.util.List;
+
+@Entity
+@Table
+public class City {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int city_id;
+    @Column
+    private String city_name;
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    private List<Employee> employees;
+
+    public City() {
+    }
+
+    public City(String city_name) {
         this.city_name = city_name;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     public int getCity_id() {
